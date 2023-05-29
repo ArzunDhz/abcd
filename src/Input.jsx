@@ -3,11 +3,15 @@ import axios from "axios";
 import Search from '../src/assets/search.png'
 import Mp3 from '../src/assets/mp3.png'
 import Mp4 from '../src/assets/mp4.png'
+
+
 const Input = () => {
     const [textvalue, setTextValue] = useState("");
     const [data,setData] = useState('')
     const [query,setQuery] = useState(false)
     const [loading,setLoading] = useState(false)
+    const key1 = 'AIzaSyArDN004znvqFzLucxfvLfTwjwhk0ZgMcM'
+    const key2= ' AIzaSyBpOAb-VvM5fPARf2IcLwsKM-06kZKkWEI'
     const handelSubmit = (e) => {
     e.preventDefault();
     e.target.inputText.value = "";
@@ -17,7 +21,7 @@ const Input = () => {
 
 const   handelRequest =  async (e)=> {
   setLoading(true)
-    await axios.get('https://youtube.googleapis.com/youtube/v3/search?q='+e+'&key=AIzaSyBpOAb-VvM5fPARf2IcLwsKM-06kZKkWEI&part=snippet&maxResults=10')
+    await axios.get('https://youtube.googleapis.com/youtube/v3/search?q='+e+'&key= ' + key1+ '&part=snippet&maxResults=10')
     .then(function (response) {
       setData(response.data.items)
       setQuery(true)
@@ -41,22 +45,24 @@ const downloadmp3 = async (e)=>{
         },
       };
   return await axios.request(options).then((response) => window.location.replace(response.data.link))
+
 }
 
 const downloadmp4 = async(e)=>{
   const options = {
     method: 'GET',
-    url: 'https://youtube-videos.p.rapidapi.com/mp4',
+    url: 'https://youtube-video-and-shorts-downloader.p.rapidapi.com/',
     params: {
-      videoId:e
+      url: 'https://youtu.be/'+e
     },
     headers: {
       'X-RapidAPI-Key': 'dcc30b2b2fmshac3b7e241a8fc6cp1061bdjsn8937e7e638cb',
-      'X-RapidAPI-Host': 'youtube-videos.p.rapidapi.com'
+      'X-RapidAPI-Host': 'youtube-video-and-shorts-downloader.p.rapidapi.com'
     }
   };
+  
 
-    return await axios.request(options).then((response)=> window.location.replace(response.data.items[0].url))
+    return await axios.request(options).then((response)=> console.log(response))
 }
 
 
