@@ -21,7 +21,7 @@ const Input = () => {
 
 const   handelRequest =  async (e)=> {
   setLoading(true)
-    await axios.get('https://youtube.googleapis.com/youtube/v3/search?q='+e+'&key= ' + key1+ '&part=snippet&maxResults=10')
+    await axios.get('https://youtube.googleapis.com/youtube/v3/search?q='+e+'&key='+ key1+ '&part=snippet&maxResults=10')
     .then(function (response) {
       setData(response.data.items)
       setQuery(true)
@@ -62,7 +62,7 @@ const downloadmp4 = async(e)=>{
   };
   
 
-    return await axios.request(options).then((response)=> console.log(response))
+    return await axios.request(options).then((response)=> window.location.replace(response.data.video.url))
 }
 
 
@@ -83,7 +83,7 @@ const downloadmp4 = async(e)=>{
 
 
 </div>
-<div className="main_container ml-6">
+<div className="main_container">
 
 {query? 
 loading? (<>
