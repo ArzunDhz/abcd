@@ -1,10 +1,10 @@
 
-import Search from '../src/assets/search.png'
-import Facebook from '../src/assets/facebook.png'
-import Twitter from '../src/assets/twitter.png'
-import Inastagram from '../src/assets/instagram.png'
-import Logo from '../src/assets/Logo.png'
-import Menu from '../src/assets/menu.png'
+import Search from './assets/search.png'
+import Facebook from './assets/facebook.png'
+import Twitter from './assets/twitter.png'
+import Inastagram from './assets/instagram.png'
+import Logo from './assets/Logo.png'
+import Menu from './assets/menu.png'
 import Loading from './Loading'
 import { useState } from "react"
 import axios from "axios";
@@ -21,19 +21,19 @@ const FinalInput = () => {
 
     const handelSubmit = (e) => {
         e.preventDefault();
-        e.target.inputText.value = "";
+        e.target.inputText.value = null;
         handelRequest(textvalue)
     };
 
 
     const handelRequest = async (e) => {
 
-
+        setLoading(true)
         await axios.get('https://youtube.googleapis.com/youtube/v3/search?q=' + e + '&key=' + key1 + '&part=snippet&maxResults=10')
             .then(function (response) {
                 setData(response.data.items)
                 setQuery(true)
-                setLoading(true)
+                
             })
             .catch(function (error) {
                 console.log(error);
@@ -71,7 +71,7 @@ const FinalInput = () => {
         };
 
 
-        return await axios.request(options).then((response) => { setLoading(false), alert(response.data.video.url) })
+        return await axios.request(options).then((response) => { setLoading(false), window.location.replace(response.data.video.url) })
     }
 
     return (
@@ -89,7 +89,7 @@ const FinalInput = () => {
                             placeholder=' Search...'
 
                         />
-                        <button className="  ml-3 mt-1.3 mt-12" ><img src={Search} className=' w-7  opacity-50' alt="" srcset="" /></button>
+                        <button className="  ml-3 mt-12" ><img src={Search} className=' w-7  opacity-50' alt="" srcset="" /></button>
                     </form>
                     <div className="flex-col justify-between items-center">
                         <Loading />
@@ -97,15 +97,17 @@ const FinalInput = () => {
                         <Loading />
                     </div>
                 </>) : (<>
-                    <form className="   text-white flex justify-center items-center">
+                    <form onSubmit={handelSubmit} className="   text-white flex justify-center items-center">
+
                         <input
                             name="inputText"
-                            className="  mt-12 indent-5 text-blue-900 rounded-xl h-[30px] w-[290px] ml-[40px] lg:h-[40px] lg:w-[700px] opacity-50 "
+                            className=" mt-4 indent-5 text-blue-900 rounded-xl h-[30px] w-[290px] ml-[40px] lg:h-[40px] lg:w-[700px] opacity-50 "
                             type="text"
                             placeholder=' Search...'
+                            onChange={(e) => setTextValue(e.target.value)}
 
                         />
-                        <button className="  ml-3 mt-1.3 mt-12" ><img src={Search} className=' w-7  opacity-50' alt="" srcset="" /></button>
+                        <button className=" ml-3 mt-4" ><img src={Search} className=' w-7  opacity-50' alt="" srcset="" /></button>
                     </form>
 
                     {data.map(items =>
