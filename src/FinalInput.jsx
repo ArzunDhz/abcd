@@ -14,6 +14,8 @@ const FinalInput = () => {
     const [data, setData] = useState('')
     const [query, setQuery] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [fetch, setFetch] = useState(false)
+    const [downloadLoading, setDownloadLoading] = useState(false)
     const key1 = 'AIzaSyArDN004znvqFzLucxfvLfTwjwhk0ZgMcM'
     const key2 = ' AIzaSyBpOAb-VvM5fPARf2IcLwsKM-06kZKkWEI'
 
@@ -21,9 +23,10 @@ const FinalInput = () => {
 
     const handelSubmit = (e) => {
         e.preventDefault();
+        setQuery(true)
         e.target.inputText.value = null;
         handelRequest(textvalue)
-        
+
     };
 
 
@@ -33,9 +36,8 @@ const FinalInput = () => {
         await axios.get('https://youtube.googleapis.com/youtube/v3/search?q=' + e + '&key=' + key2 + '&part=snippet&maxResults=10')
             .then(function (response) {
                 setData(response.data.items)
-                setQuery(true)
-               
-                
+                setFetch(true);
+
             })
             .catch(function (error) {
                 console.log(error);
@@ -45,6 +47,7 @@ const FinalInput = () => {
 
     const downloadmp3 = async (e) => {
         setLoading(true)
+        setDownloadLoading(true)
         const options = {
             method: "GET",
             url: "https://youtube-mp36.p.rapidapi.com/dl",
@@ -54,12 +57,13 @@ const FinalInput = () => {
                 "X-RapidAPI-Host": "youtube-mp36.p.rapidapi.com",
             },
         };
-        return await axios.request(options).then((response) => { setLoading(false), window.location.replace(response.data.link) })
+        return await axios.request(options).then((response) => { setDownloadLoading(false), setLoading(false), window.location.replace(response.data.link) })
 
     }
 
     const downloadmp4 = async (e) => {
         setLoading(true)
+        setDownloadLoading(true)
         const options = {
             method: 'GET',
             url: 'https://youtube-video-and-shorts-downloader.p.rapidapi.com/',
@@ -73,7 +77,7 @@ const FinalInput = () => {
         };
 
 
-        return await axios.request(options).then((response) => { setLoading(false), window.location.replace(response.data.video.url) })
+        return await axios.request(options).then((response) => { setDownloadLoading(false), setLoading(false), window.location.replace(response.data.video.url) })
     }
 
     return (
@@ -82,22 +86,48 @@ const FinalInput = () => {
 
 
             {query ?
-                loading ? (<>
-                    <form className="   text-white flex justify-center items-center">
-                        <input
-                            name="inputText"
-                            className="  mt-12 indent-5 text-blue-900 rounded-xl h-[30px] w-[290px] ml-[40px] lg:h-[40px] lg:w-[700px] opacity-50 "
-                            type="text"
-                            placeholder=' Search...'
 
-                        />
-                        <button className="  ml-3 mt-12" ><img src={Search} className=' w-7  opacity-50' alt="" srcset="" /></button>
-                    </form>
-                    <div className="flex-col justify-between items-center">
-                        <Loading />
-                        <Loading />
-                        <Loading />
-                    </div>
+                
+                loading ? (<>
+
+
+                    {downloadLoading ?
+<>
+
+                             <div  className=' min-h-screen w-full flex  justify-center items-center' role="status ">
+                            <svg aria-hidden="true" class="   inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-green-500" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+                            </svg>
+                            <span class="sr-only">Loading...</span>
+                        </div> </>
+
+                     : 
+                        <>
+                         <form className="   text-white flex justify-center items-center">
+                                <input
+                                    name="inputText"
+                                    className="  mt-12 indent-5 text-blue-900 rounded-xl h-[30px] w-[290px] ml-[40px] lg:h-[40px] lg:w-[700px] opacity-50 "
+                                    type="text"
+                                    placeholder=' Search...'
+
+                                />
+                                <button className="  ml-3 mt-12" ><img src={Search} className=' w-7  opacity-50' alt="" srcset="" /></button>
+                            </form>
+                            <div className="flex-col justify-between items-center">
+                                <Loading />
+                                <Loading />
+                                <Loading />
+                            </div>
+                        </>}
+
+
+
+
+
+
+
+
                 </>) : (<>
                     <form onSubmit={handelSubmit} className="   text-white flex justify-center items-center">
 
@@ -112,11 +142,11 @@ const FinalInput = () => {
                         <button className=" ml-3 mt-4" ><img src={Search} className=' w-7  opacity-50' alt="" srcset="" /></button>
                     </form>
 
-                    {data.map(items =>
+                    {fetch ? data.map(items =>
                         <>
                             <div className="flex justify-between items-center">
                                 <div role="status" class=" flex-col h-80 m-auto mt-20 max-w-sm lg:max-w-xl p-4  md:p-6 bg-[#131B21] rounded-lg  bg-opacity-50">
-                                    <img  loading='lazy' className=' m-auto h-48  ' src={items.snippet.thumbnails.high.url} alt="" />
+                                    <img loading='lazy' className=' m-auto h-48  ' src={items.snippet.thumbnails.high.url} alt="" />
                                     <h1 className=' text-white mt-2'> {(items.snippet.title).slice(0, 30)}...  </h1>
 
                                     <div className=" mt-4 flex justify-center space-x-2">
@@ -133,26 +163,8 @@ const FinalInput = () => {
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-                        </>)
+                        </>) : null
                     }
-
-
-
-
-
-
-
-
-
-
-
                 </>)
 
 
@@ -202,19 +214,6 @@ const FinalInput = () => {
 
 
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
     )
 }
