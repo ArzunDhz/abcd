@@ -165,7 +165,7 @@ const FinalInput = () => {
                             <img src={Menu} className=' ml-auto  h-[45%] mt-11 m-3 lg:mt-10' alt="" />
                         </div>
                     </nav>
-                    <h1 className=' text-white text-center mt-4 text-[80px] lg:mt-[90px]'>Discover Videos</h1>
+                    <h1 className=' font-bold text-[60px] text-white text-center mt-20 lg:text-[80px] lg:mt-[90px]'>Discover <span className=' font-thin'>Videos </span></h1>
 
 
 
@@ -173,17 +173,17 @@ const FinalInput = () => {
 
                         <input
                             name="inputText"
-                            className=" indent-5 text-blue-900 rounded-xl h-[30px] w-[290px] ml-[40px] lg:h-[40px] lg:w-[700px] opacity-50 "
+                            className=" mt-[-60px] indent-5 text-blue-900  rounded-full h-[50px] w-[270px] ml-[10px] lg:h-[40px] lg:w-[700px] opacity-50 "
                             type="text"
                             placeholder=' Search...'
                             onChange={(e) => setTextValue(e.target.value)}
 
                         />
-                        <button className=" ml-3 mt-1.3" ><img src={Search} className=' w-7  opacity-50' alt="" srcset="" /></button>
+                        <button className=" ml-3 mt-[-55px]" ><img src={Search} className=' w-7  opacity-50' alt="" srcset="" /></button>
                     </form>
 
-                    <footer className=' h-[160px] lg:h-40 '>
-                        <div className=" flex text-lg  text-[#3282B8] justify-center space-x-7">
+                    <footer className=' mt-28 h-[160px] lg:h-[160px] lg:mt-20 '>
+                        <div className=" flex text-lg  text-[#3282B8] justify-center space-x-5">
                             <p>Terms&Condition</p>
                             <p>  About us</p>
                             <p>  Contact us</p>
