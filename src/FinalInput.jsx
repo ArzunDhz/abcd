@@ -3,7 +3,7 @@ import Search from './assets/search.png'
 import Facebook from './assets/facebook.png'
 import Twitter from './assets/twitter.png'
 import Inastagram from './assets/instagram.png'
-import Logo from './assets/Logo.png'
+import Logo from './assets/logo.png'
 import Menu from './assets/menu.png'
 import Loading from './Loading'
 import { useState } from "react"
