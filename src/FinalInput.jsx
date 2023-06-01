@@ -30,7 +30,7 @@ const FinalInput = () => {
     const handelRequest = async (e) => {
 
         setLoading(true)
-        await axios.get('https://youtube.googleapis.com/youtube/v3/search?q=' + e + '&key=' + key1 + '&part=snippet&maxResults=10')
+        await axios.get('https://youtube.googleapis.com/youtube/v3/search?q=' + e + '&key=' + key2 + '&part=snippet&maxResults=10')
             .then(function (response) {
                 setData(response.data.items)
                 setQuery(true)
