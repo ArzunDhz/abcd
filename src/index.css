@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-color: black;
+  background-color: gray;
 }
 
 .main_container{
@@ -27,4 +27,16 @@ max-width: 100%;
     padding: 0;
 }
 
+.container
+{
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-areas: 
+  " header"
+  " footer";
+}
+Footer {
+  position: fixed;
+ bottom: 0px;
 
+}
