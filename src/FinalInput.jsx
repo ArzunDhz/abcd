@@ -96,7 +96,7 @@ const FinalInput = () => {
     useEffect(() => {
 
         if (search !== '') {
-            axios.request(`https://justcors.com/tl_302320e/http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${search}`).then(res => { setStartSearch(true), setsearchedData(res.data[1]) })
+            axios.request(`https://justcors.com/l_bykqhcg3ll/http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${search}`).then(res => { setStartSearch(true), setsearchedData(res.data[1]) })
 
         } else {
             setsearchedData('')
