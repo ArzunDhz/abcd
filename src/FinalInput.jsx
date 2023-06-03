@@ -155,7 +155,7 @@ const keysArray = [ key1, key2, key3, key4 , key5]
                         <>
                             <form autoComplete='off' onSubmit={handelSubmit} className=" container text-white flex justify-center items-center">
 
-                                <div className=" p-2 w-full  rounded-lg bg-gray-900 border-none fixed top-[-24px] left-[-1px] gird_item1 flex justify-center mt-6 ">
+                                <div className=" p-2 w-full  rounded-lg  bg-[#1B262C]  border-none fixed top-[-24px] left-[-1px] gird_item1 flex justify-center mt-6 ">
                                     <input
                                         name="inputText"
                                         className="  lg:mt-[0px] indent-[32px] text-blue-900  rounded-full h-[50px] w-[270px] ml-[20px] lg:h-[40px] lg:w-[700px] opacity-80 "
@@ -187,7 +187,7 @@ const keysArray = [ key1, key2, key3, key4 , key5]
                 </>) : (<>
                     <form autoComplete='off' onSubmit={handelSubmit} className=" container text-white flex justify-center items-center">
 
-                        <div  onClick={()=> showSuggestion(false)} className=" p-2 w-full  rounded-lg bg-gray-900 border-none fixed top-[-24px] left-[-1px] gird_item1 flex justify-center mt-6 ">
+                        <div  onClick={()=> showSuggestion(false)} className=" p-2 w-full  bg-[#1B262C] rounded-lg  bg- border-none fixed top-[-24px] left-[-1px] gird_item1 flex justify-center mt-6 ">
                             <input
                                 name="inputText"
                                 className=" lg:mt-[0px] indent-[32px] text-blue-900  rounded-full h-[50px] w-[270px] ml-[20px] lg:h-[40px] lg:w-[700px] opacity-100 "
@@ -201,7 +201,7 @@ const keysArray = [ key1, key2, key3, key4 , key5]
                             <button className=" ml-2 " ><img src={Search} className=' w-7  opacity-50' alt="" srcset="" /></button>
 
                         </div>
-                        <div className="  lg:left-[325px] lg:top-[51px]      grid_item2  left-[37px] top-[60px]  fixed flex justify-center">
+                        <div className="  lg:left-[325px] lg:top-[51px]      grid_item2  left-[37px] top-[61px]  fixed flex justify-center">
                             <div className="  ml-[-12px]  rounded-xl  bg-white lg:w-[700px] w-[265px] ">
                                 {startSearch ? <> {showSuggestion ? <>{searchedData.map(e =>
 
