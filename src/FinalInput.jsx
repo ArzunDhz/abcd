@@ -14,14 +14,14 @@ const FinalInput = () => {
     const key4= 'AIzaSyDAd2kxk-k812X6TdXfm2USHFwb-AHmN6w'
     const key5= 'AIzaSyDSAtnx_Cvb1-q9Mn4SECH7okab6bCYozc'
 
-
+const keysArray = [ key1, key2, key3, key4 , key5]
     const [textvalue, setTextValue] = useState("");
     const [data, setData] = useState('')
     const [query, setQuery] = useState(false)
     const [loading, setLoading] = useState(false)
     const [fetch, setFetch] = useState(false)
     const [downloadLoading, setDownloadLoading] = useState(false)
-    const[ key , setKey] = useState(key2)
+    const[ key , setKey] = useState(keysArray[0])
 
 
     const handelSubmit = (e) => {
@@ -36,14 +36,23 @@ const FinalInput = () => {
     const handelRequest = async (e) => {
         setQuery(true)
         setLoading(true)
-        await axios.get('https://youtube.googleapis.com/youtube/v3/search?q=' + e + '&key=' + key + '&part=snippet&maxResults=10&type=video')
+        await axios.get('https://youtube.googleapis.com/youtube/v3/search?q=' + e + '&key=' + key + '&part=snippet&maxResults=20&type=video')
             .then(function (response) {
                 setData(response.data.items)
                 setFetch(true);
 
             })
             .catch(function (error) {
-                setKey( key4 )
+               alert( 'SearchAgain')
+                for( const i = 0 ; i < keysArray.length ; i++ )
+                {
+                    setKey(keysArray[i])
+                    if(i === 4)
+                    {
+                        i=0;
+                    }
+                }
+                
                 
             })
         setLoading(false)
@@ -192,7 +201,7 @@ const FinalInput = () => {
                             <button className=" ml-2 " ><img src={Search} className=' w-7  opacity-50' alt="" srcset="" /></button>
 
                         </div>
-                        <div className="  lg:left-[460px] lg:top-[50px]      grid_item2  left-[61px] top-[53px]  fixed flex justify-center">
+                        <div className="  lg:left-[325px] lg:top-[51px]      grid_item2  left-[61px] top-[53px]  fixed flex justify-center">
                             <div className="  ml-[-12px]  rounded-xl  bg-white lg:w-[700px] w-[265px] ">
                                 {startSearch ? <> {showSuggestion ? <>{searchedData.map(e =>
 
