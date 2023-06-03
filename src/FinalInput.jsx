@@ -36,7 +36,7 @@ const FinalInput = () => {
     const handelRequest = async (e) => {
         setQuery(true)
         setLoading(true)
-        await axios.get('https://youtube.googleapis.com/youtube/v3/search?q=' + e + '&key=' + key + '&part=snippet&maxResults=10')
+        await axios.get('https://youtube.googleapis.com/youtube/v3/search?q=' + e + '&key=' + key + '&part=snippet&maxResults=10&type=video')
             .then(function (response) {
                 setData(response.data.items)
                 setFetch(true);
