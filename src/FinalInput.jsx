@@ -34,7 +34,7 @@ const FinalInput = () => {
 
 
     const handelRequest = async (e) => {
-
+        setQuery(true)
         setLoading(true)
         await axios.get('https://youtube.googleapis.com/youtube/v3/search?q=' + e + '&key=' + key + '&part=snippet&maxResults=10')
             .then(function (response) {
@@ -198,7 +198,7 @@ const FinalInput = () => {
 
                                     <li className='  items-center flex  list-none    text-black  '>
                                         <img src={Search2} className=' w-4 h-4 ml-2  ' alt="" srcset="" />
-                                        <button className=' ml-2 p-0 ' onClick={() => { setInputBox(e), setShowSuggestion(false) }} >{e.slice(0, 25)} </button>
+                                        <button className=' ml-2 p-0 ' onClick={() => { setInputBox(e), setShowSuggestion(false) , handelRequest(e) }} >{e.slice(0, 25)} </button>
                                     </li>
                                 )}</> : null}   </> : <></>
                                 }
