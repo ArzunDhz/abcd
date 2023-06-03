@@ -8,6 +8,12 @@ import axios from "axios";
 
 
 const FinalInput = () => {
+    const key1 = 'AIzaSyArDN004znvqFzLucxfvLfTwjwhk0ZgMcM'
+    const key2 = ' AIzaSyBpOAb-VvM5fPARf2IcLwsKM-06kZKkWEI'
+    const key3 = 'AIzaSyC-840YZd_KpTYia9_qqvtF7URQjp5oHqw'
+    const key4= 'AIzaSyDAd2kxk-k812X6TdXfm2USHFwb-AHmN6w'
+    const key5= 'AIzaSyDSAtnx_Cvb1-q9Mn4SECH7okab6bCYozc'
+
 
     const [textvalue, setTextValue] = useState("");
     const [data, setData] = useState('')
@@ -15,9 +21,7 @@ const FinalInput = () => {
     const [loading, setLoading] = useState(false)
     const [fetch, setFetch] = useState(false)
     const [downloadLoading, setDownloadLoading] = useState(false)
-    const key1 = 'AIzaSyArDN004znvqFzLucxfvLfTwjwhk0ZgMcM'
-    const key2 = ' AIzaSyBpOAb-VvM5fPARf2IcLwsKM-06kZKkWEI'
-
+    const[ key , setKey] = useState(key2)
 
 
     const handelSubmit = (e) => {
@@ -32,14 +36,15 @@ const FinalInput = () => {
     const handelRequest = async (e) => {
 
         setLoading(true)
-        await axios.get('https://youtube.googleapis.com/youtube/v3/search?q=' + e + '&key=' + key1 + '&part=snippet&maxResults=10')
+        await axios.get('https://youtube.googleapis.com/youtube/v3/search?q=' + e + '&key=' + key + '&part=snippet&maxResults=10')
             .then(function (response) {
                 setData(response.data.items)
                 setFetch(true);
 
             })
             .catch(function (error) {
-                console.log(error);
+                setKey( key4 )
+                
             })
         setLoading(false)
     }
@@ -89,12 +94,13 @@ const FinalInput = () => {
     const [searchedData, setsearchedData] = useState([])
     const [startSearch, setStartSearch] = useState(false)
     const [showSuggestion, setShowSuggestion] = useState(true)
+
     const handleChange = e => {
         setSearch(e.target.value)
     }
 
     useEffect(() => {
-
+        
         if (search !== '') {
             axios.request(`https://justcors.com/l_bykqhcg3ll/http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${search}`).then(res => { setStartSearch(true), setsearchedData(res.data[1]) })
 
@@ -115,7 +121,7 @@ const FinalInput = () => {
 
 
     return (
-        <div  onClick={()=>showSuggestion(false)} className='Frontpage '>
+        <div  className='Frontpage '>
 
 
 
@@ -140,10 +146,10 @@ const FinalInput = () => {
                         <>
                             <form autoComplete='off' onSubmit={handelSubmit} className=" container text-white flex justify-center items-center">
 
-                                <div className="gird_item1 flex justify-center mt-6 ">
+                                <div className=" p-2 w-full  rounded-lg bg-gray-900 border-none fixed top-[-24px] left-[-1px] gird_item1 flex justify-center mt-6 ">
                                     <input
                                         name="inputText"
-                                        className="  lg:mt-[0px] indent-[32px] text-blue-900  rounded-full h-[50px] w-[270px] ml-[20px] lg:h-[40px] lg:w-[700px] opacity-50 "
+                                        className="  lg:mt-[0px] indent-[32px] text-blue-900  rounded-full h-[50px] w-[270px] ml-[20px] lg:h-[40px] lg:w-[700px] opacity-80 "
                                         type="text"
                                         placeholder=' Search...'
                                         onChange={(e) => { setTextValue(e.target.value), handleChange(e) }}
@@ -172,10 +178,10 @@ const FinalInput = () => {
                 </>) : (<>
                     <form autoComplete='off' onSubmit={handelSubmit} className=" container text-white flex justify-center items-center">
 
-                        <div className="gird_item1 flex justify-center mt-6 ">
+                        <div  onClick={()=> showSuggestion(false)} className=" p-2 w-full  rounded-lg bg-gray-900 border-none fixed top-[-24px] left-[-1px] gird_item1 flex justify-center mt-6 ">
                             <input
                                 name="inputText"
-                                className="  lg:mt-[0px] indent-[32px] text-blue-900  rounded-full h-[50px] w-[270px] ml-[20px] lg:h-[40px] lg:w-[700px] opacity-50 "
+                                className=" lg:mt-[0px] indent-[32px] text-blue-900  rounded-full h-[50px] w-[270px] ml-[20px] lg:h-[40px] lg:w-[700px] opacity-100 "
                                 type="text"
                                 placeholder=' Search...'
                                 onChange={(e) => { setTextValue(e.target.value), handleChange(e) }}
@@ -186,13 +192,13 @@ const FinalInput = () => {
                             <button className=" ml-2 " ><img src={Search} className=' w-7  opacity-50' alt="" srcset="" /></button>
 
                         </div>
-                        <div className="  lg:left-[300px] lg:top-[64px]      grid_item2 mt-1 left-[61px] top-[73px]  fixed flex justify-center">
+                        <div className="  lg:left-[460px] lg:top-[50px]      grid_item2  left-[61px] top-[53px]  fixed flex justify-center">
                             <div className="  ml-[-12px]  rounded-xl  bg-white lg:w-[700px] w-[265px] ">
                                 {startSearch ? <> {showSuggestion ? <>{searchedData.map(e =>
 
                                     <li className='  items-center flex  list-none    text-black  '>
                                         <img src={Search2} className=' w-4 h-4 ml-2  ' alt="" srcset="" />
-                                        <button className=' ml-2 p-0 ' onClick={() => { handelSubmit, setInputBox(e), setShowSuggestion(false) }} >{e.slice(0, 25)} </button>
+                                        <button className=' ml-2 p-0 ' onClick={() => { setInputBox(e), setShowSuggestion(false) }} >{e.slice(0, 25)} </button>
                                     </li>
                                 )}</> : null}   </> : <></>
                                 }
@@ -204,15 +210,15 @@ const FinalInput = () => {
 
                     {fetch ? data.map(items =>
                         <>
-                            <div className="flex justify-between items-center">
+                            <div onClick={ ()=> setShowSuggestion(false)} className="flex justify-between items-center">
                                 <div role="status" class=" flex-col h-80 m-auto mt-20 w-[337px] lg:max-w-xl p-4  md:p-6 bg-[#131B21] rounded-lg  bg-opacity-50">
                                     <img loading='lazy' className=' m-auto h-48  ' src={items.snippet.thumbnails.high.url} alt="" />
-                                    <h1 className=' text-white mt-2'>   {(items.snippet.title).replace(/&quot;/g, '"').slice(0, 30)}   </h1>
+                                    <h1 className=' text-white mt-2'>   {(items.snippet.title).replace(/&quot;/g, '"').replace(/&#39;/g,"'").slice(0, 30)}   </h1>
 
                                     <div className=" mt-4 flex justify-center space-x-2">
                                         <button onClick={() => downloadmp3(items.id.videoId)} class="inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
                                             <span class="px-2 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                                                Download Mp3
+                                                Dowbload Mp3
                                             </span>
                                         </button>
                                         <button onClick={() => downloadmp4(items.id.videoId)} class=" inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
@@ -261,7 +267,7 @@ const FinalInput = () => {
                             <div className=" lg:ml-[30px] ml-[-12px]  rounded-xl  bg-white lg:w-[700px] w-[265px] opacity-70">
                                 {startSearch ? <> {showSuggestion ? <>{searchedData.map(e =>
 
-                                    <li  onClick={() => { setInputBox(e), setShowSuggestion(false) }} className=' cursor-pointer hover:bg-slate-200 rounded-xl  items-center flex  list-none    text-black  '>
+                                    <li  onClick={() => { setInputBox(e), setShowSuggestion(false) , handelRequest(e) }} className=' cursor-pointer hover:bg-slate-200 rounded-xl  items-center flex  list-none    text-black  '>
                                         <img src={Search2} className=' w-4 h-4 ml-2  ' alt="" srcset="" />
                                         <button className=' ml-2 p-0 '  >{e.slice(0, 25)} </button>
                                     </li>
