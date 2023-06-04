@@ -13,7 +13,7 @@ const FinalInput = () => {
     const key3 = 'AIzaSyC-840YZd_KpTYia9_qqvtF7URQjp5oHqw'
     const key4= 'AIzaSyDAd2kxk-k812X6TdXfm2USHFwb-AHmN6w'
     const key5= 'AIzaSyDSAtnx_Cvb1-q9Mn4SECH7okab6bCYozc'
-
+    var i = 0 ;
 const keysArray = [ key1, key2, key3, key4 , key5]
     const [textvalue, setTextValue] = useState("");
     const [data, setData] = useState('')
@@ -44,8 +44,7 @@ const keysArray = [ key1, key2, key3, key4 , key5]
             })
             .catch(function (error) {
                alert( 'SearchAgain')
-                for( const i = 0 ; i < keysArray.length ; i++ )
-                {
+                     i++;
                     setKey(keysArray[i])
                     if(i === 4)
                     {
